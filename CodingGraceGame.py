@@ -440,6 +440,33 @@ def green_magic_room(player_info_arg):
         print("The magician waves his hand and you are whisked away...\n")
         return "flee"
 
+def black_trap_room(player_info_arg):
+    """A dangerous trap room."""
+
+    print("\n=== TRAP ROOM ===")
+    print("You step into a room and hear a CLICK!")
+
+    player_info_arg["location"] = "Trap Room"
+
+    player_info_arg["health"] -= 15
+
+    player_info_arg["choices"].append("Trap Room")
+
+    show_player_info(player_info_arg)
+
+    action = input("[roll | flee] > ").strip().lower()
+
+    if action == "roll":
+        print("You dodge the arrows and escape!")
+        return player_info_arg
+
+    elif "flee" in action:
+        return "flee"
+
+    else:
+        you_died("Arrows hit you from the walls!")
+    
+
 
 # ===========================================================================
 # CONTROL FUNCTIONS
