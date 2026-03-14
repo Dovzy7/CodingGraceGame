@@ -440,6 +440,73 @@ def green_magic_room(player_info_arg):
         print("The magician waves his hand and you are whisked away...\n")
         return "flee"
 
+def yellow_treasure_room(player_info_arg):
+    """The Yellow Room: a treasure room filled with dangerous rewards.
+
+    The player may choose between several treasures:
+    - Golden apple: poisonous and fatal
+    - Emerald goblet: knocks the player out and sends them back
+    - Ruby crown of thorns: grants a level increase and a treasure item
+    - Leave the room: safely return to the doors
+    - Gold coins: triggers a cave-in and kills the player
+    """
+    print("\nYou have entered the Yellow Treasure Room.")
+
+    # Update Player Status 
+    player_info_arg["location"] = "Yellow Room"
+
+    special_item = "Ruby Crown of Thorns"
+    player_info_arg["choices"].append("Yellow Room")
+    show_player_info(player_info_arg)
+
+    print("It is a darkly lit cave, with candles dimly lighting the way.")
+    print("Gold coins are scattered everywhere.")
+    print("In front of you is a red carpet leading to an altar with a treasure chest on it.")
+    print("Inside the treasure chest, you find a golden apple, an emerald goblet,")
+    print("and a ruby crown of thorns.\n")
+
+    print("What do you do?")
+    print("1. Take the golden apple")
+    print("2. Take the emerald goblet")
+    print("3. Take the ruby crown of thorns")
+    print("4. Leave the room")
+    print("5. Pick up the gold coins")
+
+    choice = input("> ").strip()
+
+    if choice == "1":
+        print("You take the golden apple and eat it.")
+        you_died("The apple was poisoned")
+
+    elif choice == "2":
+        print("You take the emerald goblet and drink from it.")
+        print("You are knocked out and wake up back at the start of the dungeon.")
+        return "flee"
+
+    elif choice == "3":
+        print("You take the ruby crown of thorns and place it on your head.")
+        if special_item not in player_info_arg["inventory"]:
+            player_info_arg["inventory"].append(special_item)
+            print(f"You gained the {special_item}!")
+        player_info_arg["level"] += 1
+        print(f"You are now level {player_info_arg['level']}.")
+        return player_info_arg
+
+    elif choice == "4":
+        print("You leave the room.")
+        return "flee"
+
+    elif choice == "5":
+        print("You greedily scoop up the gold coins.")
+        print("Suddenly, the room starts shaking violently.")
+        print("The walls crumble around you, and the ground splits open beneath your feet.")
+        you_died("The treasure room collapsed and swallowed you whole")
+
+    else:
+        print("Invalid choice. Please try again.")
+        return "flee"
+    # --- Update player state ---
+    
 
 # ===========================================================================
 # CONTROL FUNCTIONS
