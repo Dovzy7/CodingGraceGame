@@ -17,4 +17,4 @@ As a team, we agreed on the three new rooms that will be added to the game for t
 # Agreed Room Assignments
 - Daniel — Yellow Treasure Room
 - Rahim — Purple Puzzle Room
-- Chinny — Black Trap Room
+- Chinmoy — Black Trap Room
