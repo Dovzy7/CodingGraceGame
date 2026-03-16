@@ -497,7 +497,7 @@ def yellow_treasure_room(player_info_arg):
     print("2. Take the emerald goblet")
     print("3. Take the ruby crown of thorns")
     print("4. Leave the room")
-    print("5. Pick up the gold coins")
+    print("5. Take all three items!")
 
     choice = input("> ").strip()
 
@@ -524,7 +524,7 @@ def yellow_treasure_room(player_info_arg):
         return "flee"
 
     elif choice == "5":
-        print("You greedily scoop up the gold coins.")
+        print("You greedily scoop up all the treasures.")
         print("Suddenly, the room starts shaking violently.")
         print("The walls crumble around you, and the ground splits open beneath your feet.")
         you_died("The treasure room collapsed and swallowed you whole")
@@ -576,7 +576,7 @@ def get_player_name(player_info_arg):
 
 
 def start_new_adventure(player_info_arg):
-    """Presents the three-door choice and routes to the selected room.
+    """Presents the six choice and routes to the selected room.
 
     A while-loop drives the game flow: each iteration shows the dungeon,
     asks the player to pick a door, and dispatches to the corresponding
@@ -592,13 +592,13 @@ def start_new_adventure(player_info_arg):
     Args:
         player_info_arg: The player state dictionary.
     """
+    
 
     while True:
         print_new_dungeon()
         print("You enter a room, and you see a red door to your left "
-              "and blue and green doors to your right.")
-        door_picked = input("Do you pick the red door, blue door, "
-                            "or green door? > ")
+              "blue and green doors to your right,and yellow ,black, and purple doors behind you.")
+        door_picked = input("< Do you pick the red door, blue door, green door,\n yellow door, black door, or purple door? > ")
 
         # We compare only the first few characters so that inputs like
         # "red door", "blue", or "green one" all work.
@@ -610,8 +610,16 @@ def start_new_adventure(player_info_arg):
             room_result = blissful_ignorance_of_illusion_room(player_info_arg)
         elif door.startswith("green"):
             room_result = green_magic_room(player_info_arg)
+
+        elif door.startswith("yellow"):
+            room_result = yellow_treasure_room(player_info_arg)
+        elif door.startswith("black"):
+            room_result = black_trap_room(player_info_arg)
+        elif door.startswith("purple"):
+            room_result = purple_puzzle_room(player_info_arg)
+
         else:
-            print("Sorry, it's either 'red', 'blue', or 'green' as the "
+            print("Sorry, it's either 'red', 'blue','green','yellow','black', or 'purple' as the "
                   "answer. You're the weakest link, goodbye!")
             # Continue the loop so the player can try again.
             continue
